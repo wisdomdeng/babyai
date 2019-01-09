@@ -135,6 +135,9 @@ Documentation for the ICLR19 levels can be found in
 There are also older levels documented in
 [docs/bonus_levels.md](docs/bonus_levels.md).
 
+### Save the multi-room grid and the instructions
+
+
 ### Troubleshooting
 
 If you run into error messages relating to OpenAI gym or PyQT, it may be that the version of those libraries that you have installed is incompatible. You can try upgrading specific libraries with pip3, eg: `pip3 install --upgrade gym`. If the problem persists, please [open an issue](https://github.com/mila-udem/babyai/issues) on this repository and paste a *complete* error message, along with some information about your platform (are you running Windows, Mac, Linux? Are you running this on a Mila machine?).

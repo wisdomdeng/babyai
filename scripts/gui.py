@@ -400,7 +400,13 @@ def main(argv):
 
     # Load the gym environment
     env = gym.make(options.env)
-    env.seed(options.seed)
+    env.seed(10)
+    # print(env.mission)
+    # env.reset()
+    # print(env.mission)
+
+    # env.save_mission('example.pkl')
+
 
     # Create the application window
     app = QApplication(sys.argv)

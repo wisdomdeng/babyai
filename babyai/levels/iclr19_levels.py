@@ -524,6 +524,42 @@ class Level_GoToSeq(LevelGen):
             unblocking=False
         )
 
+class Level_GoToMult(LevelGen):
+    """
+    Sequencing of go-to-object commands.
+
+    Competencies: Maze, GoTo, Seq
+    No locked room.
+    No locations.
+    No unblocking.
+    """
+
+    def __init__(
+        self,
+        room_size=8,
+        num_rows=3,
+        num_cols=3,
+        num_dists=18,
+        seed=None,
+    ):
+        super().__init__(
+            room_size=room_size,
+            num_rows=num_rows,
+            num_cols=num_cols,
+            num_dists=num_dists,
+            seed=seed,
+            action_kinds=['goto'],
+            config_file='example.pkl',
+            locked_room_prob=0,
+            locations=False,
+            unblocking=False,
+            instr_no_door=True,
+            maxim_depth=2
+        )
+
+
+
+
 
 class Level_GoToSeqS5R2(Level_GoToSeq):
     def __init__(self, seed=None):
