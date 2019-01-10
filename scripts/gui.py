@@ -399,8 +399,30 @@ def main(argv):
     (options, args) = parser.parse_args()
 
     # Load the gym environment
+    # seed = 1
+    # num_0 = 0
+    # num_1 = 0
+    # num_2 = 0
+    # while num_0 < 100 or num_2 < 100 or num_1 < 100:
+    #     env = gym.make(options.env)
+    #     env.seed(seed)
+    #     # env.reset()
+    #     seed += 1
+    #     print(env.maxim_depth)
+    #     if env.maxim_depth == 0 and num_0 < 100:
+    #         env.save_mission('tasks/0_{}.pkl'.format(num_0))
+    #         num_0 += 1
+    #     elif env.maxim_depth == 1 and num_1 < 100:
+    #         env.save_mission('tasks/1_{}.pkl'.format(num_1))
+    #         num_1 += 1
+    #     elif env.maxim_depth == 2 and num_2 < 100:
+    #
+    #         env.save_mission('tasks/2_{}.pkl'.format(num_2))
+    #         num_2 += 1
+
     env = gym.make(options.env)
-    env.seed(10)
+    env.seed(options.seed)
+    
     # print(env.mission)
     # env.reset()
     # print(env.mission)

@@ -549,14 +549,13 @@ class Level_GoToMult(LevelGen):
             num_dists=num_dists,
             seed=seed,
             action_kinds=['goto'],
-            config_file='example.pkl',
+            config_file=None,
             locked_room_prob=0,
             locations=False,
             unblocking=False,
             instr_no_door=True,
-            maxim_depth=2
+            maxim_depth=None
         )
-
 
 
 
