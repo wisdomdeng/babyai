@@ -150,3 +150,11 @@ To contribute to this project, you should first create your own fork, and rememb
 
 BabyAI is an open-ended grounded language acquisition effort at [Mila](https://mila.quebec/en/). The current BabyAI platform was designed to study data-effiency of existing methods under the assumption that a human provides all teaching signals
 (i.e. demonstrations, rewards, etc.). For more information, see the paper (http://arxiv.org/abs/1810.08272).
+
+## Fix the task
+Generating environment that the task is fixed after every reset. The environment is named after 'BabyAI-GoToMultD<task_depth_level>N<task_number>-v0'. task_depth_level is the depth of task compositions, must be one of 0, 1, 2. task_number is a number for every task of each depth task level.
+
+## TODO
+* Fix the room topology.
+* Fix the other distractors.
+* Fix the initial room posision.

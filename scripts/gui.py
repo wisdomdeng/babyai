@@ -422,7 +422,7 @@ def main(argv):
 
     env = gym.make(options.env)
     env.seed(options.seed)
-    
+
     # print(env.mission)
     # env.reset()
     # print(env.mission)
