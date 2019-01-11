@@ -5,7 +5,8 @@ Levels described in the ICLR 2019 submission.
 import gym
 from .verifier import *
 from .levelgen import *
-
+import random
+import os.path as osp
 
 class Level_GoToObj(RoomGridLevel):
     """
@@ -510,7 +511,7 @@ class Level_GoToSeq(LevelGen):
         num_rows=3,
         num_cols=3,
         num_dists=18,
-        seed=None
+        seed=None,
     ):
         super().__init__(
             room_size=room_size,
@@ -521,8 +522,20 @@ class Level_GoToSeq(LevelGen):
             action_kinds=['goto'],
             locked_room_prob=0,
             locations=False,
-            unblocking=False
+            unblocking=False,
         )
+        if seed is None:
+            self.fixed_env = True
+
+    def rand_seed(self, seed):
+        self.fixed_env = False
+        super(Level_GoToSeq, self).seed(seed)
+
+    def reset(self, **kwargs):
+        if self.fixed_seed is not None and self.fixed_env:
+            self.seed(self.fixed_seed)
+        return super(Level_GoToSeq, self).reset()
+
 
 class Level_GoToMult(LevelGen):
     """
@@ -541,6 +554,7 @@ class Level_GoToMult(LevelGen):
         num_cols=3,
         num_dists=18,
         seed=None,
+        sample_task_path='/Users/ruizhi/Documents/projects/babyai/tasks'
     ):
         super().__init__(
             room_size=room_size,
@@ -556,8 +570,39 @@ class Level_GoToMult(LevelGen):
             instr_no_door=True,
             maxim_depth=None
         )
+        self.sample_task_path = sample_task_path
+        if seed is None:
+            self.fixed_env = True
 
+    def rand_seed(self, seed):
+        self.fixed_env = False
+        super(Level_GoToMult, self).seed(seed)
 
+    def reset(self, **kwargs):
+        if self.fixed_seed is not None and self.fixed_env:
+            self.seed(self.fixed_seed)
+        return super(Level_GoToMult, self).reset()
+
+    def sample_task(self, depths=(0, 1, 2), seed=False):
+        if not seed:
+            return (osp.join(self.sample_task_path,
+                             '{}_{}.pkl'.format(random.sample(depths, 1)[0],
+                                                random.randint(0, 99))), None)
+        if seed:
+            return (osp.join(self.sample_task_path,
+                             '{}_{}.pkl'.format(random.sample(depths, 1)[0],
+                                                random.randint(0, 99))),
+                    random.randint(1, 2147483647))
+
+    def sample_tasks(self, num_tasks, depths=(1, 2, 3), seed=False):
+        return [self.sample_task(depths, seed) for _ in range(num_tasks)]
+
+    def reset_task(self, task):
+        self.config_file = task[0]
+        if task[1] is not None:
+            print(task[1])
+            self.seed(task[1])
+        self.reset()
 
 
 class Level_GoToSeqS5R2(Level_GoToSeq):

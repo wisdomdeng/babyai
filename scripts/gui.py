@@ -422,20 +422,33 @@ def main(argv):
 
     env = gym.make(options.env)
     env.seed(options.seed)
+    env.config_file = 'tasks/0_0.pkl'
 
-    # print(env.mission)
-    # env.reset()
+    env.reset()
     # print(env.mission)
 
     # env.save_mission('example.pkl')
 
 
     # Create the application window
+    # app = QApplication(sys.argv)
+    # window = AIGameWindow(env)
+    #
+    # # Run the application
+    # sys.exit(app.exec_())
+    env.config_file = 'tasks/1_0.pkl'
+
+    env.reset()
+
     app = QApplication(sys.argv)
     window = AIGameWindow(env)
 
     # Run the application
     sys.exit(app.exec_())
+
+
+
+
 
 
 if __name__ == '__main__':

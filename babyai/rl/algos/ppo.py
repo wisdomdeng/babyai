@@ -34,6 +34,7 @@ class PPOAlgo(BaseAlgo):
         # Collect experiences
 
         exps, logs = self.collect_experiences()
+
         '''
         exps is a DictList with the following keys ['obs', 'memory', 'mask', 'action', 'value', 'reward',
          'advantage', 'returnn', 'log_prob'] and ['collected_info', 'extra_predictions'] if we use aux_info
@@ -85,8 +86,8 @@ class PPOAlgo(BaseAlgo):
                     sb = exps[inds + i]
 
                     # Compute loss
-
                     model_results = self.acmodel(sb.obs, memory * sb.mask)
+
                     dist = model_results['dist']
                     value = model_results['value']
                     memory = model_results['memory']

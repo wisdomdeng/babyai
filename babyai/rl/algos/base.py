@@ -128,6 +128,8 @@ class BaseAlgo(ABC):
             reward, policy loss, value loss, etc.
 
         """
+        from pdb import set_trace as st
+        st()
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
 
@@ -163,6 +165,7 @@ class BaseAlgo(ABC):
                     self.reshape_reward(obs_, action_, reward_, done_)
                     for obs_, action_, reward_, done_ in zip(obs, action, reward, done)
                 ], device=self.device)
+
             else:
                 self.rewards[i] = torch.tensor(reward, device=self.device)
             self.log_probs[i] = dist.log_prob(action)

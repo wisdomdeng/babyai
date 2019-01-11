@@ -274,7 +274,8 @@ class LevelGen(RoomGridLevel):
         seed=None,
         maxim_depth=None,
         config_file=None,
-        instr_no_door=False
+        instr_no_door=False,
+
     ):
 
         self.num_dists = num_dists
