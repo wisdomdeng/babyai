@@ -65,7 +65,6 @@ class BaseAlgo(ABC):
         self.preprocess_obss = preprocess_obss or default_preprocess_obss
         self.reshape_reward = reshape_reward
         self.aux_info = aux_info
-
         # Store helpers values
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -106,6 +105,7 @@ class BaseAlgo(ABC):
         self.log_return = [0] * self.num_procs
         self.log_reshaped_return = [0] * self.num_procs
         self.log_num_frames = [0] * self.num_procs
+        self.found_true = False
 
     def collect_experiences(self):
         """Collects rollouts and computes advantages.
@@ -129,20 +129,21 @@ class BaseAlgo(ABC):
 
         """
         from pdb import set_trace as st
-        st()
         for i in range(self.num_frames_per_proc):
             # Do one agent-environment interaction
-
             preprocessed_obs = self.preprocess_obss(self.obs, device=self.device)
+
             with torch.no_grad():
+                from pdb import set_trace as st
+                st()
                 model_results = self.acmodel(preprocessed_obs, self.memory * self.mask.unsqueeze(1))
                 dist = model_results['dist']
                 value = model_results['value']
                 memory = model_results['memory']
                 extra_predictions = model_results['extra_predictions']
 
-            action = dist.sample()
 
+            action = dist.sample()
             obs, reward, done, env_info = self.env.step(action.cpu().numpy())
             if self.aux_info:
                 env_info = self.aux_info_collector.process(env_info)
@@ -157,6 +158,8 @@ class BaseAlgo(ABC):
             self.memory = memory
 
             self.masks[i] = self.mask
+
+
             self.mask = 1 - torch.tensor(done, device=self.device, dtype=torch.float)
             self.actions[i] = action
             self.values[i] = value

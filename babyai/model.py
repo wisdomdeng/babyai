@@ -275,6 +275,7 @@ class ACModel(nn.Module, babyai.rl.RecurrentACModel):
         This function allows using a pre-trained model without aux_info and add aux_info to it and still make
         it possible to finetune.
         '''
+
         try:
             if not hasattr(self, 'aux_info') or not set(self.aux_info) == set(aux_info):
                 self.aux_info = aux_info

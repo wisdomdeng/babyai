@@ -306,6 +306,9 @@ class LevelGen(RoomGridLevel):
             num_cols=num_cols,
             seed=seed
         )
+        # from pdb import set_trace as st
+        # st()
+        self.observation_space.shape = self.observation_space.spaces['image'].shape
 
 
     def gen_mission(self):
@@ -440,8 +443,6 @@ class LevelGen(RoomGridLevel):
 
         with open(save_path, 'wb') as f:
             pickle.dump(results, f)
-
-
 
     def add_distractors_config(self, objs):
         dists = []

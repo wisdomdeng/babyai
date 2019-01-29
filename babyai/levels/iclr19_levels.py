@@ -594,7 +594,7 @@ class Level_GoToMult(LevelGen):
                                                 random.randint(0, 99))),
                     random.randint(1, 2147483647))
 
-    def sample_tasks(self, num_tasks, depths=(1, 2, 3), seed=False):
+    def sample_tasks(self, num_tasks, depths=(0, 1, 2), seed=False):
         return [self.sample_task(depths, seed) for _ in range(num_tasks)]
 
     def reset_task(self, task):

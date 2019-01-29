@@ -15,8 +15,6 @@ def worker(conn, env):
         else:
             raise NotImplementedError
 
-## Fix the environment
-
 class ParallelEnv(gym.Env):
     """A concurrent execution of environments in multiple processes."""
 

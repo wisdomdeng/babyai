@@ -48,6 +48,7 @@ class PPOAlgo(BaseAlgo):
         (n_procs * n_frames_per_proc) x k 2D tensors where k is the number of classes for multiclass classification
         '''
 
+
         for _ in range(self.epochs):
             # Initialize log values
 
@@ -80,7 +81,6 @@ class PPOAlgo(BaseAlgo):
                 # Initialize memory
 
                 memory = exps.memory[inds]
-
                 for i in range(self.recurrence):
                     # Create a sub-batch of experience
                     sb = exps[inds + i]

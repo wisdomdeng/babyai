@@ -76,6 +76,7 @@ utils.configure_logging(args.model)
 logger = logging.getLogger(__name__)
 
 # Define obss preprocessor
+
 if 'emb' in args.arch:
     obss_preprocessor = utils.IntObssPreprocessor(args.model, envs[0].observation_space, args.pretrained_model)
 else:
@@ -87,6 +88,8 @@ if acmodel is None:
     if args.pretrained_model:
         acmodel = utils.load_model(args.pretrained_model, raise_not_found=True)
     else:
+        from pdb import set_trace as st
+        st()
         acmodel = ACModel(obss_preprocessor.obs_space, envs[0].action_space,
                           args.image_dim, args.memory_dim, args.instr_dim,
                           not args.no_instr, args.instr_arch, not args.no_mem, args.arch)
